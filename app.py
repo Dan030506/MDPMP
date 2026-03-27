@@ -15,13 +15,23 @@ st.set_page_config(
 )
 
 # ============================================
-# CUSTOM CSS FOR MODERN UI
+# CUSTOM CSS FOR BOTH DARK & LIGHT MODE
 # ============================================
 st.markdown("""
 <style>
+    /* Force light background for app regardless of system theme */
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
     /* Main Container Styling */
     .main {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: transparent;
+    }
+    
+    /* Ensure all text is visible in both modes */
+    .stMarkdown, .stText, .stNumberInput label, .stSelectbox label {
+        color: #2c3e50 !important;
     }
     
     /* Header Styling */
@@ -30,7 +40,7 @@ st.markdown("""
         padding: 2rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 20px;
-        color: white;
+        color: white !important;
         margin-bottom: 2rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
@@ -39,16 +49,18 @@ st.markdown("""
         font-size: 2.5rem;
         margin-bottom: 0.5rem;
         font-weight: bold;
+        color: white !important;
     }
     
     .main-header p {
         font-size: 1.1rem;
         opacity: 0.9;
+        color: white !important;
     }
     
-    /* Card Styling */
+    /* Card Styling - White backgrounds always */
     .card {
-        background: white;
+        background: white !important;
         border-radius: 20px;
         padding: 1.5rem;
         text-align: center;
@@ -57,6 +69,7 @@ st.markdown("""
         height: 100%;
         cursor: pointer;
         border: 1px solid rgba(0,0,0,0.05);
+        color: #2c3e50 !important;
     }
     
     .card:hover {
@@ -65,17 +78,17 @@ st.markdown("""
     }
     
     .diabetes-card {
-        background: linear-gradient(135deg, #fef3e8 0%, #ffe6d5 100%);
+        background: linear-gradient(135deg, #fff5e8 0%, #ffe6d5 100%) !important;
         border-bottom: 4px solid #f39c12;
     }
     
     .heart-card {
-        background: linear-gradient(135deg, #ffe8e8 0%, #ffd4d4 100%);
+        background: linear-gradient(135deg, #ffe8e8 0%, #ffd4d4 100%) !important;
         border-bottom: 4px solid #e74c3c;
     }
     
     .parkinson-card {
-        background: linear-gradient(135deg, #e8f5e9 0%, #d4edd7 100%);
+        background: linear-gradient(135deg, #e8f5e9 0%, #d4edd7 100%) !important;
         border-bottom: 4px solid #2ecc71;
     }
     
@@ -88,12 +101,14 @@ st.markdown("""
         font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
+        color: #2c3e50 !important;
     }
     
     .card-params {
         font-size: 0.85rem;
-        color: #666;
+        color: #555 !important;
         margin: 1rem 0;
+        line-height: 1.4;
     }
     
     .card-badge {
@@ -103,36 +118,45 @@ st.markdown("""
         font-size: 0.8rem;
         font-weight: bold;
         margin-top: 0.5rem;
+        color: white !important;
     }
     
     .diabetes-badge {
         background: #f39c12;
-        color: white;
     }
     
     .heart-badge {
         background: #e74c3c;
-        color: white;
     }
     
     .parkinson-badge {
         background: #2ecc71;
-        color: white;
     }
     
     /* Feature Box Styling */
     .feature-box {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: white !important;
         border-radius: 15px;
         padding: 1rem;
         margin: 0.5rem 0;
         border-left: 4px solid #667eea;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .feature-box h3 {
+        color: #2c3e50 !important;
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-box p {
+        color: #555 !important;
     }
     
     /* Risk Level Styling */
     .risk-low {
-        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-        color: #155724;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+        color: #155724 !important;
         padding: 8px 16px;
         border-radius: 25px;
         display: inline-block;
@@ -140,8 +164,8 @@ st.markdown("""
     }
     
     .risk-moderate {
-        background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-        color: #856404;
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%) !important;
+        color: #856404 !important;
         padding: 8px 16px;
         border-radius: 25px;
         display: inline-block;
@@ -149,8 +173,8 @@ st.markdown("""
     }
     
     .risk-high {
-        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-        color: #721c24;
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%) !important;
+        color: #721c24 !important;
         padding: 8px 16px;
         border-radius: 25px;
         display: inline-block;
@@ -188,53 +212,59 @@ st.markdown("""
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: white !important;
         border-radius: 30px;
         padding: 0.5rem 2rem;
         font-weight: bold;
-        color: #495057;
+        color: #495057 !important;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
     }
     
     /* Sidebar Styling */
-    .css-1d391kg {
+    .css-1d391kg, .stSidebar {
         background: linear-gradient(180deg, #2c3e50 0%, #1a2632 100%);
+    }
+    
+    .stSidebar .stMarkdown, .stSidebar .stText {
+        color: white !important;
     }
     
     /* Info Box */
     .info-box {
-        background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+        background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%) !important;
         border-radius: 10px;
         padding: 1rem;
         margin: 1rem 0;
         border-left: 4px solid #17a2b8;
+        color: #0c5460 !important;
     }
     
     /* Footer */
     .footer {
         text-align: center;
         padding: 2rem;
-        color: #666;
+        color: #666 !important;
         font-size: 0.8rem;
         border-top: 1px solid #ddd;
         margin-top: 2rem;
+        background: transparent;
+    }
+    
+    /* Number Input Labels */
+    label {
+        color: #2c3e50 !important;
+        font-weight: 500;
+    }
+    
+    /* Success/Error/Warning Messages */
+    .stAlert {
+        background-color: white !important;
     }
 </style>
-""", unsafe_allow_html=True)
-
-# ============================================
-# HEADER SECTION
-# ============================================
-st.markdown("""
-<div class="main-header">
-    <h1>🏥 AI-Based Multi-Disease Prediction System</h1>
-    <p>Advanced Risk Assessment | Diabetes | Heart Disease | Parkinson's Disease</p>
-    <p style="font-size: 0.9rem;">Powered by Clinical Guidelines & Rule-Based AI</p>
-</div>
 """, unsafe_allow_html=True)
 
 # ============================================
@@ -621,6 +651,17 @@ def predict_parkinsons_advanced(mdvp_fo, mdvp_fhi, mdvp_flo, jitter_percent, jit
     return result, risk_score, color, advice
 
 # ============================================
+# HEADER SECTION
+# ============================================
+st.markdown("""
+<div class="main-header">
+    <h1>🏥 AI-Based Multi-Disease Prediction System</h1>
+    <p>Advanced Risk Assessment | Diabetes | Heart Disease | Parkinson's Disease</p>
+    <p style="font-size: 0.9rem;">Powered by Clinical Guidelines & Rule-Based AI</p>
+</div>
+""", unsafe_allow_html=True)
+
+# ============================================
 # HOMEPAGE SECTION
 # ============================================
 
@@ -628,8 +669,8 @@ def show_homepage():
     # Welcome Message
     st.markdown("""
     <div style="text-align: center; margin-bottom: 2rem;">
-        <p style="font-size: 1.2rem; color: #555;">Your Personal AI-Powered Health Risk Assessment Tool</p>
-        <p style="color: #666;">Get instant risk assessment for three major diseases with over 60 clinical parameters</p>
+        <p style="font-size: 1.2rem; color: #2c3e50;">Your Personal AI-Powered Health Risk Assessment Tool</p>
+        <p style="color: #555;">Get instant risk assessment for three major diseases with over 60 clinical parameters</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -663,13 +704,13 @@ def show_homepage():
     st.markdown("---")
     
     # Disease Cards Section
-    st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>Select a Disease to Assess Your Risk</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; margin-bottom: 2rem; color: #2c3e50;'>Select a Disease to Assess Your Risk</h2>", unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown("""
-        <div class="card diabetes-card" onclick="window.location.href='?page=diabetes'">
+        <div class="card diabetes-card">
             <div class="card-icon">🩺</div>
             <div class="card-title">Diabetes</div>
             <div class="card-params">14 Clinical Parameters</div>
@@ -715,7 +756,7 @@ def show_homepage():
     st.markdown("---")
     
     # Statistics Section
-    st.markdown("<h2 style='text-align: center; margin-bottom: 1rem;'>📊 Disease Statistics in India</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; margin-bottom: 1rem; color: #2c3e50;'>📊 Disease Statistics in India</h2>", unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns(3)
     
@@ -734,7 +775,7 @@ def show_homepage():
     st.markdown("---")
     
     # How It Works Section
-    st.markdown("<h2 style='text-align: center; margin-bottom: 1rem;'>🔍 How It Works</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; margin-bottom: 1rem; color: #2c3e50;'>🔍 How It Works</h2>", unsafe_allow_html=True)
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -783,14 +824,14 @@ def show_homepage():
     """, unsafe_allow_html=True)
 
 # ============================================
-# DIABETES TAB - ENHANCED
+# DIABETES SECTION
 # ============================================
 
 def show_diabetes():
     st.markdown("""
     <div style="background: linear-gradient(135deg, #fef3e8 0%, #ffe6d5 100%); padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem;">
         <h2 style="color: #e67e22;">🩺 Diabetes Risk Assessment</h2>
-        <p>Enter your health parameters for a comprehensive diabetes risk evaluation based on 14 clinical parameters.</p>
+        <p style="color: #2c3e50;">Enter your health parameters for a comprehensive diabetes risk evaluation based on 14 clinical parameters.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -868,14 +909,14 @@ def show_diabetes():
         st.rerun()
 
 # ============================================
-# HEART DISEASE TAB - ENHANCED
+# HEART DISEASE SECTION
 # ============================================
 
 def show_heart():
     st.markdown("""
     <div style="background: linear-gradient(135deg, #ffe8e8 0%, #ffd4d4 100%); padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem;">
         <h2 style="color: #e74c3c;">❤️ Heart Disease Risk Assessment</h2>
-        <p>Enter your clinical measurements for comprehensive heart disease risk evaluation based on 19 clinical parameters.</p>
+        <p style="color: #2c3e50;">Enter your clinical measurements for comprehensive heart disease risk evaluation based on 19 clinical parameters.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -964,14 +1005,14 @@ def show_heart():
         st.rerun()
 
 # ============================================
-# PARKINSON'S TAB - ENHANCED
+# PARKINSON'S SECTION
 # ============================================
 
 def show_parkinson():
     st.markdown("""
     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #d4edd7 100%); padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem;">
         <h2 style="color: #2ecc71;">🧠 Parkinson's Disease Risk Assessment</h2>
-        <p>Enter voice measurements and clinical symptoms for comprehensive evaluation based on 27 clinical parameters.</p>
+        <p style="color: #2c3e50;">Enter voice measurements and clinical symptoms for comprehensive evaluation based on 27 clinical parameters.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -1103,17 +1144,10 @@ with st.sidebar:
     
     st.markdown("### ⚠️ Medical Disclaimer")
     st.caption("This tool is for educational purposes only. Not a substitute for professional medical advice.")
-
-# ============================================
-# FOOTER
-# ============================================
-
-st.markdown("""
-<div class="footer">
-    <p>AI-Based Multi-Disease Prediction System | Advanced Risk Assessment | For Educational Purposes Only</p>
-    <p>Powered by Clinical Guidelines & Rule-Based AI | N. Daniel Raj | DCSML | UID: 111723049034</p>
-</div>
-""", unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.markdown("### 👨‍💻 Developer")
+    st.caption("N. Daniel Raj | DCSML | UID: 111723049034")
 
 # ============================================
 # PAGE NAVIGATION
@@ -1127,3 +1161,13 @@ elif st.session_state.page == "heart":
     show_heart()
 elif st.session_state.page == "parkinson":
     show_parkinson()
+
+# ============================================
+# FOOTER
+# ============================================
+st.markdown("""
+<div class="footer">
+    <p>AI-Based Multi-Disease Prediction System | Advanced Risk Assessment | For Educational Purposes Only</p>
+    <p>Powered by Clinical Guidelines & Rule-Based AI | N. Daniel Raj | DCSML | UID: 111723049034</p>
+</div>
+""", unsafe_allow_html=True)
